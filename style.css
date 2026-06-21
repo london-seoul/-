@@ -1,0 +1,339 @@
+/* ──────────────────────────────────────────
+   RESET & BASE
+────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #f0eeeb;
+  color: #1a1a1a;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 400;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ──────────────────────────────────────────
+   HEADER
+────────────────────────────────────────── */
+header {
+  background: #ffffff;
+  text-align: center;
+  padding: 48px 24px 40px;
+  border-bottom: 2px solid #1a1a1a;
+}
+
+.site-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.45em;
+  color: #888888;
+  margin-bottom: 14px;
+}
+
+.site-title {
+  font-size: clamp(2rem, 6vw, 3.8rem);
+  font-weight: 800;
+  color: #1a1a1a;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+
+.site-meta {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: #aaaaaa;
+}
+
+/* ──────────────────────────────────────────
+   DAY TABS
+────────────────────────────────────────── */
+.day-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: #ffffff;
+  border-bottom: 2px solid #1a1a1a;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #888888;
+  padding: 15px 22px 13px;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  position: relative;
+  bottom: -2px;
+}
+
+.tab-btn:hover {
+  color: #1a1a1a;
+  border-bottom-color: #1a1a1a;
+}
+
+.tab-btn.active {
+  color: #1a1a1a;
+  border-bottom-color: #1a1a1a;
+}
+
+/* ──────────────────────────────────────────
+   SLIDE VIEW
+────────────────────────────────────────── */
+#dayContent {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 24px 72px;
+}
+
+/* Each slide PNG + hotspot layer */
+.slide-wrap {
+  position: relative;
+  display: block;
+  margin-bottom: 12px;
+  line-height: 0;
+}
+
+.slide-wrap img {
+  width: 100%;
+  display: block;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.10);
+}
+
+/* Transparent click zone over each card */
+.hotspot {
+  position: absolute;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  overflow: hidden;
+}
+
+.hotspot:hover {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.35);
+}
+
+/* Small label shown on hover */
+.hotspot-label {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(26, 26, 26, 0.88);
+  color: #ffffff;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  max-width: 92%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.03em;
+}
+
+.hotspot:hover .hotspot-label {
+  opacity: 1;
+}
+
+@media (max-width: 760px) {
+  #dayContent { padding: 20px 16px 56px; }
+}
+
+/* ──────────────────────────────────────────
+   TAG BADGES (modal only)
+────────────────────────────────────────── */
+.card-tag {
+  display: inline-block;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+}
+
+.tag-필수  { background: #e8f4d9; color: #4a7c2f; border: 1px solid #b5d98a; }
+.tag-선택  { background: #ede9f0; color: #6a5a80; border: 1px solid #c0aed0; }
+.tag-식사  { background: #fdeae6; color: #c04030; border: 1px solid #f0b0a0; }
+.tag-뮤지컬{ background: #e8edf8; color: #3050a0; border: 1px solid #a0b4e0; }
+.tag-근교  { background: #e6f3ef; color: #2a6a50; border: 1px solid #90cbb8; }
+.tag-쇼핑  { background: #f5e8f5; color: #7a3a80; border: 1px solid #d0a0d4; }
+.tag-명소  { background: #e8f0f8; color: #2050a0; border: 1px solid #90b4e0; }
+.tag-무료  { background: #e8f5e8; color: #2a6a2a; border: 1px solid #90cc90; }
+
+/* ──────────────────────────────────────────
+   MODAL (팝업)
+────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  padding: 20px;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-box {
+  background: #ffffff;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(18px) scale(0.98);
+  transition: transform 0.25s ease;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.20);
+  scrollbar-width: thin;
+  scrollbar-color: #cccccc transparent;
+}
+
+.modal-overlay.open .modal-box {
+  transform: translateY(0) scale(1);
+}
+
+/* Close button */
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #cccccc;
+  color: #666666;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: 'Nanum Gothic', sans-serif;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #ffffff;
+}
+
+/* Image area */
+.modal-img-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #eeeeee;
+}
+
+#modalImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+#modalImg.loading { opacity: 0.2; }
+
+/* Prev / Next */
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid #cccccc;
+  color: #1a1a1a;
+  width: 46px;
+  height: 46px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.18s;
+  font-family: serif;
+}
+
+.modal-nav:hover {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.modal-nav.prev { left: 12px; }
+.modal-nav.next { right: 12px; }
+
+.modal-counter {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.50);
+  padding: 3px 9px;
+  letter-spacing: 0.05em;
+}
+
+/* Info area */
+.modal-info {
+  padding: 24px 30px 32px;
+  border-top: 2px solid #1a1a1a;
+}
+
+.modal-name {
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 10px 0 12px;
+  line-height: 1.2;
+}
+
+.modal-desc {
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 0.9rem;
+  color: #555555;
+  line-height: 1.85;
+}
+
+@media (max-width: 560px) {
+  .modal-info { padding: 18px 20px 26px; }
+  .modal-nav { width: 38px; height: 38px; font-size: 1.3rem; }
+}
+
+/* ──────────────────────────────────────────
+   SCROLLBAR
+────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cccccc; }
+::-webkit-scrollbar-thumb:hover { background: #999999; }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>영국 여행 계획 · London 2025</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <p class="site-eyebrow">LONDON TRAVEL ITINERARY</p>
+    <h1 class="site-title">영국 여행 계획</h1>
+    <p class="site-meta">5 DAYS · LONDON · 2025</p>
+  </header>
+
+  <nav class="day-tabs" id="dayTabs"></nav>
+
+  <main id="dayContent"></main>
+
+  <!-- Photo Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="닫기">✕</button>
+      <div class="modal-img-wrap">
+        <img id="modalImg" src="" alt="" loading="lazy">
+        <button class="modal-nav prev" id="modalPrev" aria-label="이전">&#8249;</button>
+        <button class="modal-nav next" id="modalNext" aria-label="다음">&#8250;</button>
+        <div class="modal-counter" id="modalCounter"></div>
+      </div>
+      <div class="modal-info">
+        <div id="modalTagWrap"></div>
+        <h2 class="modal-name" id="modalName"></h2>
+        <p class="modal-desc" id="modalDesc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="photos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
